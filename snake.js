@@ -51,4 +51,34 @@ document.body.addEventListener("keyup", (event) => {
 // 2 = 00000010 //decimal to binary convert
 // console.log(Math.random() * 20 | 0) // single pipe (|) bitwise OR. It sets each bit to 1 if one of two bits is 1
 
-draw();
+function updateLocation() {
+  //Snake is going up
+  //   head = snake[0]; // [0, 1]
+  snake.unshift([snake[0][0] + direction[0], snake[0][1] + direction[1]]);
+  //   tail = snake.pop(); // [1, 4] //remove the last element from the snake array
+  //   tail[0] = head[0] + direction[0]; // 0
+  //   tail[1] = head[1] + direction[1]; // 0
+  //   snake.unshift(tail); //add to the beginning of the snake array
+
+  //If the head is in the same position as apple we should grow and the apple should reposition.
+  if (snake[0][0] === apple[0] && snake[0][1] === apple[1]) {
+    apple = [
+      Math.floor(Math.random() * 20),
+      Math.floor(Math.random() * 20),
+      // (Math.random() * 20) | 0,
+      // (Math.random() * 20) | 0,
+    ];
+  } else {
+    snake.pop();
+  }
+
+  for (let i = 1; i < snake.length; i++) {
+    if ((snake[i][0] === snake[0][0]) === snake[0][1]) {
+      snake = [[0, 1]];
+    }
+  }
+  draw();
+}
+
+//Continually update location
+setInterval(updateLocation, 200); // 1sec = 10000 miliseconds // 0.2 sec
