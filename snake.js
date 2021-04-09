@@ -17,6 +17,7 @@ snake = [
 direction = [1, 0]; // x and y axises;  x = 0, y = 0
 apple = [8, 3];
 
+//Draw snake
 function draw() {
   context.clearRect(0, 0, 300, 300);
 
@@ -25,7 +26,6 @@ function draw() {
 
   context.fillStyle = "black";
   snake.forEach((position) => {
-    // console.log(position)
     context.fillRect(position[0], position[1], 1, 1); // 1px x, 1px y
   });
 }
@@ -41,33 +41,14 @@ document.body.addEventListener("keyup", (event) => {
   } else if (event.key === "ArrowLeft") {
     direction = [-1, 0];
   }
-  console.log("event", event);
 });
 
-//Snake is going to the right of the screen
-
-//Binary representation of number 1
-// 1 = 00000001 (8 bits represents 1 byte of information)
-// 2 = 00000010 //decimal to binary convert
-// console.log(Math.random() * 20 | 0) // single pipe (|) bitwise OR. It sets each bit to 1 if one of two bits is 1
-
 function updateLocation() {
-  //Snake is going up
-  //   head = snake[0]; // [0, 1]
   snake.unshift([snake[0][0] + direction[0], snake[0][1] + direction[1]]);
-  //   tail = snake.pop(); // [1, 4] //remove the last element from the snake array
-  //   tail[0] = head[0] + direction[0]; // 0
-  //   tail[1] = head[1] + direction[1]; // 0
-  //   snake.unshift(tail); //add to the beginning of the snake array
 
   //If the head is in the same position as apple we should grow and the apple should reposition.
   if (snake[0][0] === apple[0] && snake[0][1] === apple[1]) {
-    apple = [
-      Math.floor(Math.random() * 20),
-      Math.floor(Math.random() * 20),
-      // (Math.random() * 20) | 0,
-      // (Math.random() * 20) | 0,
-    ];
+    apple = [Math.floor(Math.random() * 20), Math.floor(Math.random() * 20)];
   } else {
     snake.pop();
   }
