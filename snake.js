@@ -16,3 +16,39 @@ snake = [
 
 direction = [1, 0]; // x and y axises;  x = 0, y = 0
 apple = [8, 3];
+
+function draw() {
+  context.clearRect(0, 0, 300, 300);
+
+  context.fillStyle = "red";
+  context.fillRect(apple[0], apple[1], 1, 1);
+
+  context.fillStyle = "black";
+  snake.forEach((position) => {
+    // console.log(position)
+    context.fillRect(position[0], position[1], 1, 1); // 1px x, 1px y
+  });
+}
+
+//Listen to the keyboard elements.
+document.body.addEventListener("keyup", (event) => {
+  if (event.key === "ArrowUp") {
+    direction = [0, -1];
+  } else if (event.key === "ArrowDown") {
+    direction = [0, 1];
+  } else if (event.key === "ArrowRight") {
+    direction = [1, 0];
+  } else if (event.key === "ArrowLeft") {
+    direction = [-1, 0];
+  }
+  console.log("event", event);
+});
+
+//Snake is going to the right of the screen
+
+//Binary representation of number 1
+// 1 = 00000001 (8 bits represents 1 byte of information)
+// 2 = 00000010 //decimal to binary convert
+// console.log(Math.random() * 20 | 0) // single pipe (|) bitwise OR. It sets each bit to 1 if one of two bits is 1
+
+draw();
